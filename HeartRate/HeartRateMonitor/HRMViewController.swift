@@ -23,17 +23,31 @@ class HRMViewController: UIViewController {
   private var heartRate: Int = 0  // добавил
   private var countedInterval: Int = 0 //добавил
     
-  var player: AVAudioPlayer! // добавленное свойство
+  private lazy var player: AVAudioPlayer? = {
+    guard let url = Bundle.main.url(forResource: "Edited short", withExtension: "m4a"),
+      let player = try? AVAudioPlayer(contentsOf: url)
+      else {
+      assertionFailure("Failed to setup player")
+      return nil
+    }
+    return player
+  }()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    soundTimer = Timer(timeInterval: 0.01, repeats: true, block: {_ in self.countedInterval += 1
+    heartRate = 170
+    print("view loaded")
+
+    soundTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { _ in
+      print("timer triggered \(self.countedInterval), calculation \(self.countedInterval > 60 / self.heartRate * 100)")
+      self.countedInterval += 1
       if self.countedInterval > 60 / self.heartRate * 100 && self.heartRate > 0 {
+        print("beeped")
         self.countedInterval = 0
         self.playSound()
       }
     })
-    
+
     heartRateLabel.font = UIFont.monospacedDigitSystemFont(ofSize: heartRateLabel.font!.pointSize, weight: .regular)
     centralManager = CBCentralManager(delegate: self, queue: nil) //инициализация переменной
     
@@ -168,10 +182,7 @@ extension HRMViewController: CBPeripheralDelegate {
   }
   // моя функция
   func playSound() {
-      let url = Bundle.main.url(forResource: "C", withExtension: "wav")
-      player = try! AVAudioPlayer(contentsOf: url!)
-      player.play()
-      
+      player?.play() // У тебя был раньше let player = try! Не используй ! (force unwrapping) в коде который будет выпускаться, это один из самых легких способом получить вылетание приложения. В тестах ок, в production code нет. Могут быть редкие исключения но пока о них можно не париться. Если optional то if let = или guard let = (как я в декларации player сделал) или как тут player?
   }
 
 }

@@ -12,7 +12,8 @@
 		5C0360741FB90013007BC593 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C0360721FB90013007BC593 /* Main.storyboard */; };
 		5C0360761FB90013007BC593 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C0360751FB90013007BC593 /* Assets.xcassets */; };
 		5C0360791FB90013007BC593 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C0360771FB90013007BC593 /* LaunchScreen.storyboard */; };
-		84314A3B25C35BC60025ED95 /* C.wav in Resources */ = {isa = PBXBuildFile; fileRef = 84314A3A25C35BC60025ED95 /* C.wav */; };
+		5C81E79E25CB3ED0009A934F /* C.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5C81E79D25CB3ED0009A934F /* C.wav */; };
+		5C81E7A025CB4015009A934F /* Edited short.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5C81E79F25CB4015009A934F /* Edited short.m4a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +24,8 @@
 		5C0360751FB90013007BC593 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C0360781FB90013007BC593 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C03607A1FB90013007BC593 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		84314A3A25C35BC60025ED95 /* C.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = C.wav; path = ../../../C.wav; sourceTree = "<group>"; };
+		5C81E79D25CB3ED0009A934F /* C.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = C.wav; sourceTree = "<group>"; };
+		5C81E79F25CB4015009A934F /* Edited short.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Edited short.m4a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +63,8 @@
 				5C03606E1FB90013007BC593 /* AppDelegate.swift */,
 				5C0360701FB90013007BC593 /* HRMViewController.swift */,
 				5C0360721FB90013007BC593 /* Main.storyboard */,
-				84314A3A25C35BC60025ED95 /* C.wav */,
+				5C81E79D25CB3ED0009A934F /* C.wav */,
+				5C81E79F25CB4015009A934F /* Edited short.m4a */,
 				5C0360751FB90013007BC593 /* Assets.xcassets */,
 				5C0360771FB90013007BC593 /* LaunchScreen.storyboard */,
 				5C03607A1FB90013007BC593 /* Info.plist */,
@@ -128,10 +131,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84314A3B25C35BC60025ED95 /* C.wav in Resources */,
 				5C0360791FB90013007BC593 /* LaunchScreen.storyboard in Resources */,
 				5C0360761FB90013007BC593 /* Assets.xcassets in Resources */,
+				5C81E7A025CB4015009A934F /* Edited short.m4a in Resources */,
 				5C0360741FB90013007BC593 /* Main.storyboard in Resources */,
+				5C81E79E25CB3ED0009A934F /* C.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
