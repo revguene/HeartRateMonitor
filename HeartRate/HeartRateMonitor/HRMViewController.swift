@@ -24,9 +24,11 @@ class HRMViewController: UIViewController {
   private var countedInterval: Int = 0 //добавил
     
   private lazy var player: AVAudioPlayer? = {
+    /// Плеер мы создаем только один раз чтобы не траить ресурсы каждый раз его заного создавать.
     guard let url = Bundle.main.url(forResource: "Edited short", withExtension: "m4a"),
       let player = try? AVAudioPlayer(contentsOf: url)
       else {
+        /// Тут мы сразу прекращаем работы так как основная часть приложения не сработала и мы не смогли звук настроить. assertionFailure ок во время разработки использовать, в production тут должна ошибка пользователю вылезти.
       assertionFailure("Failed to setup player")
       return nil
     }
@@ -35,13 +37,16 @@ class HRMViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    heartRate = 170
+    onHeartRateReceived(120)
     print("view loaded")
 
     soundTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { _ in
-      print("timer triggered \(self.countedInterval), calculation \(self.countedInterval > 60 / self.heartRate * 100)")
       self.countedInterval += 1
-      if self.countedInterval > 60 / self.heartRate * 100 && self.heartRate > 0 {
+      /// Оставил принты тут чтобы яснее было в логах как код решает когда пищать.
+      print("timer triggered \(self.countedInterval), calculation \(Float(self.countedInterval) > 60 / Float(self.heartRate) * 100), check \(60 / Float(self.heartRate) * 100)")
+      /// Обрати внимание я тут конвертирую Int в Float потому что Int это только целые числа а тут будут дроби при делении.
+      if Float(self.countedInterval) > 60 / Float(self.heartRate) * 100
+        && self.heartRate > 0 {
         print("beeped")
         self.countedInterval = 0
         self.playSound()
@@ -61,6 +66,7 @@ class HRMViewController: UIViewController {
     //playSound()
      //!!! если фукциия playSound активна звук идет примерно один раз в секунду, если эта функция закомитена то звука совсем нет
   }
+
 }
 
 extension HRMViewController: CBCentralManagerDelegate {
@@ -182,7 +188,7 @@ extension HRMViewController: CBPeripheralDelegate {
   }
   // моя функция
   func playSound() {
-      player?.play() // У тебя был раньше let player = try! Не используй ! (force unwrapping) в коде который будет выпускаться, это один из самых легких способом получить вылетание приложения. В тестах ок, в production code нет. Могут быть редкие исключения но пока о них можно не париться. Если optional то if let = или guard let = (как я в декларации player сделал) или как тут player?
+      player?.play() /// У тебя был раньше let player = try! Не используй ! (force unwrapping) в коде который будет выпускаться, это один из самых легких способом получить вылетание приложения. В тестах ок, в production code нет. Могут быть редкие исключения но пока о них можно не париться. Если optional то if let = или guard let = (как я в декларации player сделал) или как тут player? Пожалуй единственное исключение которое на данном этапе стоит иметь ввиду это IBOutlet как у тебя наверху heartRateLabel
   }
 
 }
